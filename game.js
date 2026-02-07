@@ -262,6 +262,7 @@ function resetGame() {
   updatePauseButton();
 }
 
+
 function hasFace() {
   return !!birdFaceBitmap;
 }
