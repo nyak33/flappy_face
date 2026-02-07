@@ -253,6 +253,7 @@ canvas#game {
   aspect-ratio: 3 / 4;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 .modal.camera-only .camera-box video {
@@ -260,6 +261,10 @@ canvas#game {
   height: 100%;
   object-fit: cover;
   flex: 1;
+}
+
+.modal.camera-only .camera-actions {
+  padding: 10px 0 6px;
 }
 .face-selection {
   display: grid;
