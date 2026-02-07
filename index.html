@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flappy Face</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <h1>Flappy Face</h1>
+      <div class="topbar-actions">
+        <button id="soundToggle" class="btn btn-ghost" type="button" aria-pressed="true">Sound: On</button>
+        <button id="openFaceSelect" class="btn" type="button">Upload Face</button>
+        <button id="pauseToggle" class="btn btn-ghost" type="button" aria-pressed="false">Pause</button>
+      </div>
+    </header>
+
+    <canvas id="game" width="400" height="600"></canvas>
+  </main>
+
+  <!-- In-page modal overlay -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Crop your face">
+      <div class="modal-head">
+        <div class="modal-title">Crop your face</div>
+        <button id="closeModal" class="icon-btn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="crop-grid">
+        <div class="crop-wrap">
+          <!-- Camera preview -->
+          <div class="camera-box" id="cameraBox" hidden>
+            <video id="cameraVideo" playsinline autoplay muted></video>
+            <div class="camera-actions">
+              <button id="captureBtn" class="btn" type="button">Capture</button>
+            </div>
+          </div>
+
+          <canvas id="cropCanvas" width="320" height="320"></canvas>
+          <div class="crop-help">
+            Drag • Pinch to zoom • Two-finger rotate • Slider works too
+          </div>
+        </div>
+
+        <aside class="preview">
+          <div class="preview-title">Preview</div>
+          <canvas id="previewCanvas" width="64" height="64"></canvas>
+          <div class="preview-sub">This becomes your bird</div>
+        </aside>
+      </div>
+
+      <div class="controls">
+        <label class="row">
+          <span>Zoom</span>
+          <input id="zoom" type="range" min="0.6" max="3" value="1.2" step="0.01" />
+        </label>
+
+        <label class="row">
+          <span>Rotate</span>
+          <input id="rotate" type="range" min="-180" max="180" value="0" step="1" />
+        </label>
+
+        <div class="actions">
+          <button id="snapCenter" class="btn btn-ghost" type="button">Snap center</button>
+          <button id="resetCrop" class="btn btn-ghost" type="button">Reset</button>
+          <div class="spacer"></div>
+          <button id="cancelCrop" class="btn btn-ghost" type="button">Cancel</button>
+          <button id="useCrop" class="btn" type="button">Use this</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Face selection modal -->
+  <div id="faceSelectModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Select a face">
+      <div class="modal-head">
+        <div class="modal-title">Choose a face</div>
+        <button id="closeFaceSelectModal" class="icon-btn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="face-selection">
+        <div class="face-option">
+          <canvas id="birdFaceCanvas" width="120" height="120"></canvas>
+          <button id="selectBirdFace" class="btn" type="button">Bird</button>
+        </div>
+
+        <div class="face-option">
+          <canvas id="chickenFaceCanvas" width="120" height="120"></canvas>
+          <button id="selectChickenFace" class="btn" type="button">Chicken</button>
+        </div>
+
+        <div class="face-option">
+          <canvas id="fishFaceCanvas" width="120" height="120"></canvas>
+          <button id="selectFishFace" class="btn" type="button">Fish</button>
+        </div>
+
+        <div class="face-option">
+          <canvas id="dinoFaceCanvas" width="120" height="120"></canvas>
+          <button id="selectDinoFace" class="btn" type="button">Dino</button>
+        </div>
+
+        <div class="face-option">
+          <div class="upload-placeholder">📤</div>
+          <label class="btn">
+            Upload
+            <input id="fileInput2" type="file" accept="image/*" hidden />
+          </label>
+        </div>
+        <div class="face-option">
+          <div class="upload-placeholder">&#128247;</div>
+          <button id="openCameraFromSelect" class="btn" type="button">
+            <span class="btn-icon" aria-hidden="true">&#128247;</span>
+            Camera
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

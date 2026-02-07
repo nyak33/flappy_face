@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  background: #0b1220;
+  color: #e8eefc;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.wrap {
+  text-align: center;
+  padding: 16px 0;
+  width: 100vw;
+  max-width: 560px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.topbar h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.topbar-actions {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  width: min(400px, 92vw);
+}
+
+#soundToggle { justify-self: start; }
+#openFaceSelect { justify-self: center; }
+#pauseToggle { justify-self: end; }
+
+canvas#game {
+  background: #87ceeb;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  max-width: 92vw;
+  height: auto;
+  touch-action: manipulation;
+}
+
+.hint {
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #2a5cff;
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.btn:hover { filter: brightness(1.05); }
+.btn-ghost { background: rgba(255,255,255,0.10); }
+
+.icon-btn {
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.10);
+  color: #e8eefc;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(0,0,0,0.55);
+  padding: 16px;
+}
+
+.modal.open { display: grid; }
+
+.modal-card {
+  width: min(720px, 98vw);
+  background: #0f1a33;
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.45);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.modal-title {
+  font-weight: 950;
+  font-size: 14px;
+}
+
+.crop-grid {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 14px;
+  padding: 14px;
+  align-items: start;
+}
+
+@media (max-width: 560px) {
+  .crop-grid { grid-template-columns: 1fr; }
+  .preview { justify-self: center; }
+}
+
+.crop-wrap {
+  display: grid;
+  gap: 10px;
+  place-items: center;
+}
+
+#cropCanvas {
+  width: min(320px, 80vw);
+  height: auto;
+  border-radius: 14px;
+  background: #0b1220;
+  touch-action: none;
+}
+
+.crop-help {
+  font-size: 11px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+.preview {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.preview-title {
+  font-weight: 900;
+  font-size: 12px;
+}
+
+#previewCanvas {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.25);
+}
+
+.preview-sub {
+  font-size: 10px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+.controls {
+  padding: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.spacer { flex: 1; }
+
+.camera-box {
+  width: min(320px, 80vw);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.camera-box video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.camera-help {
+  padding: 0 10px 10px;
+  font-size: 10px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+/* Camera-only mode */
+.modal.camera-only .crop-grid {
+  grid-template-columns: 1fr;
+}
+
+.modal.camera-only .crop-wrap {
+  width: 100%;
+}
+
+.modal.camera-only #cropCanvas,
+.modal.camera-only .crop-help,
+.modal.camera-only .preview,
+.modal.camera-only .controls {
+  display: none;
+}
+
+.modal.camera-only .camera-box {
+  width: min(420px, 92vw);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal.camera-only .camera-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 1;
+}
+.face-selection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+.face-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.face-option canvas {
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: #1a2f5a;
+  width: 90px;
+  height: 90px;
+}
+
+.upload-placeholder {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: #1a2f5a;
+}
+
+.face-option .btn {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+/* Upload label uses <label class="btn">; keep same text size */
+.face-option label.btn {
+  font-size: 12px;
+}
+
+.btn-icon {
+  font-size: 16px;
+  line-height: 1;
+}
